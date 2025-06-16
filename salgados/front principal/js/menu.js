@@ -14,20 +14,35 @@ const Menu = {
     // Load menu items from API
     loadMenuItems: async () => {
         try {
+            console.log('Carregando itens do menu...');
             const response = await ApiClient.get(API_CONFIG.endpoints.products);
             
             if (response.sucesso) {
                 Menu.items = response.dados;
+                console.log('Itens carregados:', Menu.items.length);
                 Menu.renderMenuItems();
             } else {
                 console.error('Erro ao carregar produtos:', response.mensagem);
-                Menu.renderMenuItems(); // Renderizar vazio
+                Menu.showErrorState('Erro ao carregar produtos: ' + response.mensagem);
             }
         } catch (error) {
             console.error('Erro ao carregar menu:', error);
-            Utils.showMessage('Erro ao carregar cardápio. Tente novamente.', 'error');
-            Menu.renderMenuItems(); // Renderizar vazio
+            Menu.showErrorState('Não foi possível carregar o cardápio. Verifique sua conexão.');
         }
+    },
+
+    // Show error state
+    showErrorState: (message) => {
+        const menuItemsEl = document.getElementById('menu-items');
+        if (!menuItemsEl) return;
+
+        menuItemsEl.innerHTML = `
+            <div class="menu-error">
+                <h3>⚠️ Erro ao carregar cardápio</h3>
+                <p>${message}</p>
+                <button class="btn btn-primary" onclick="Menu.loadMenuItems()">Tentar Novamente</button>
+            </div>
+        `;
     },
 
     // Render menu items

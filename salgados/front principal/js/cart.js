@@ -15,13 +15,16 @@ const Cart = {
     // Carregar taxa de entrega da API
     loadDeliveryFee: async () => {
         try {
+            console.log('Carregando taxa de entrega...');
             const response = await ApiClient.get(`${API_CONFIG.endpoints.config}?key=taxa_entrega`);
             if (response.sucesso && response.dados.taxa_entrega) {
                 Cart.deliveryFee = parseFloat(response.dados.taxa_entrega);
+                console.log('Taxa de entrega carregada:', Cart.deliveryFee);
             }
         } catch (error) {
             console.error('Erro ao carregar taxa de entrega:', error);
             // Manter valor padrão
+            console.log('Usando taxa de entrega padrão:', Cart.deliveryFee);
         }
     },
 

@@ -123,6 +123,28 @@
     font-size: 1rem;
 }
 
+/* Error state */
+.menu-error {
+    text-align: center;
+    padding: 60px 20px;
+    color: #dc3545;
+    background: #f8f9fa;
+    border-radius: 16px;
+    border: 2px solid #e9ecef;
+}
+
+.menu-error h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #dc3545;
+}
+
+.menu-error p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #6c757d;
+}
+
 /* Quantity Modal Specific Styles */
 .quantity-options {
     margin-bottom: 20px;
